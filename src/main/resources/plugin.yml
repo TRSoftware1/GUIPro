@@ -1,0 +1,10 @@
+name: GUIPro
+description: Create GUIs
+main: com.trsoftware.guipro.GUIPro
+version: ${project.version}
+author: TRSoftware
+commands:
+  gui:
+    description: Main command for GUIs
+    usage: /gui help
+    aliases: [guipro, guis]

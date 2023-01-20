@@ -1,0 +1,5 @@
+guis:
+  default:
+    title: "&cDefault GUI"
+    size: 27
+    inventory:
