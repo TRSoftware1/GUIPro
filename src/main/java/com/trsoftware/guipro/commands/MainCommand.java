@@ -16,21 +16,23 @@ public class MainCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
 
-        if(cmd.getName().equalsIgnoreCase("gui")) {
+        if (cmd.getName().equalsIgnoreCase("gui")) {
 
             switch (args.length) {
                 case 1:
 
                     break;
 
-                case 4:
-                    if(args[0].equalsIgnoreCase("create")) {
-                        plugin.cc.createGUI(sender, args);
+                case 3:
+                    if (args[0].equalsIgnoreCase("set")) {
+                        if (args[1].equalsIgnoreCase("inventory")) {
+
+                        }
                     }
                     break;
 
-                case 5:
-                    if(args[0].equalsIgnoreCase("create")) {
+                case 4:
+                    if (args[0].equalsIgnoreCase("create")) {
                         plugin.cc.createGUI(sender, args);
                     }
                     break;

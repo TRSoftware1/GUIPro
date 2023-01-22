@@ -1,7 +1,10 @@
 package com.trsoftware.guipro.managers;
 
+import com.trsoftware.guipro.GUI;
 import com.trsoftware.guipro.GUIPro;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 
 import java.util.ArrayList;
 
@@ -13,18 +16,31 @@ public class GUIManager {
         this.plugin = plugin;
     }
 
-    private ArrayList<String> guiNames = new ArrayList<>();
+    private ArrayList<GUI> guis = new ArrayList<GUI>();
+    private Player activeGUICreator = null;
+    private String activeGUIName = "";
 
-    public void loadGuiNames() {
-        guiNames.clear();
+    public boolean isPlayerActiveCreator(Player p) {
+        if(!activeGUICreator.equals(null)) {
+            if(activeGUICreator.equals(p)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void loadGUIs() {
+        guis.clear();
         for(String key : plugin.getConfig().getConfigurationSection("guis").getKeys(false)) {
-            guiNames.add(key);
+            guis.add(new GUI(key, plugin.getConfig().getString("guis." + key + ".title"), plugin.getConfig().getInt("guis." + key + ".size"), plugin.getConfig().getString("guis." + key + ".inventory")));
         }
     }
 
     public boolean doesGUIAlreadyExist(String name) {
-        if(guiNames.contains(name)) {
-            return true;
+        for(int i = 0; i < guis.size(); i++) {
+            if(guis.get(i).getName().equalsIgnoreCase(name)) {
+                return true;
+            }
         }
         return false;
     }
@@ -37,6 +53,19 @@ public class GUIManager {
         plugin.getConfig().set("guis." + name + ".size", size);
 
         plugin.saveConfig();
+
+        loadGUIs();
     }
 
+    public void setGUIInventory(Player p, Inventory inventory, String name) {
+
+    }
+
+    public String getActiveGUIName() {
+        return activeGUIName;
+    }
+
+    public void setActiveGUIName(String activeGUIName) {
+        this.activeGUIName = activeGUIName;
+    }
 }
